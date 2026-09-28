@@ -78,8 +78,12 @@ export async function ensurePushHookEnabled(api: OpenClawPluginApi): Promise<boo
       return true;
     }
 
+    // This write is best-effort catch-up for existing installs and doesn't
+    // need to take effect this boot — the hooks just stay soft-blocked until
+    // the next natural reload. It must never force a restart, especially
+    // since this runs during the gateway's own startup (see registerPush()).
     await api.runtime.config.mutateConfigFile({
-      afterWrite: { mode: "auto" },
+      afterWrite: { mode: "none", reason: "aight-utils: hooks.allowConversationAccess catch-up" },
       mutate(draft: any) {
         draft.plugins ??= {};
         draft.plugins.entries ??= {};
