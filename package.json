@@ -44,7 +44,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
-    "openclaw": "2026.9.6",
+    "openclaw": ">=2026.9.6",
     "prettier": "^3.8.1",
     "tsup": "^8.5.1",
     "typescript": "^5.7.0",
